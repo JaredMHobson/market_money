@@ -30,6 +30,12 @@ describe "Vendors API" do
       expect(vendor).to have_key(:id)
       expect(vendor[:id]).to be_a String
 
+      expect(vendor).to have_key(:type)
+      expect(vendor[:type]).to eq('vendor')
+
+      expect(vendor).to have_key(:attributes)
+      expect(vendor[:attributes]).to be_a Hash
+
       expect(vendor[:attributes]).to have_key(:name)
       expect(vendor[:attributes][:name]).to be_a String
 
@@ -44,6 +50,8 @@ describe "Vendors API" do
 
       expect(vendor[:attributes]).to have_key(:credit_accepted)
       expect(vendor[:attributes][:credit_accepted]).to be_in([true, false])
+
+      expect(vendor[:id]).to_not eq(vendor2.id.to_s)
     end
   end
 
