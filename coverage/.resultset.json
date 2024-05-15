@@ -584,6 +584,20 @@
       "/Users/jaredhobson/Turing/mod3/projects/market_money/app/controllers/application_controller.rb": {
         "lines": [
           1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
           null
         ]
       },
@@ -643,22 +657,12 @@
         "lines": [
           1,
           1,
-          null,
-          1,
           2,
           1,
           null,
           null,
-          null,
           1,
           2,
-          null,
-          2,
-          1,
-          null,
-          1,
-          null,
-          null,
           null,
           null,
           null,
@@ -666,17 +670,11 @@
           null,
           1,
           2,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
           null,
           null
         ]
       }
     },
-    "timestamp": 1715751610
+    "timestamp": 1715796043
   }
 }

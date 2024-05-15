@@ -111,7 +111,7 @@ describe "Vendors API" do
 
       expect(data[:errors]).to be_a(Array)
       expect(data[:errors].first[:status]).to eq("400")
-      expect(data[:errors].first[:title]).to eq(["Description can't be blank", "Contact name can't be blank"])
+      expect(data[:errors].first[:title]).to eq("Validation failed: Description can't be blank, Contact name can't be blank")
     end
   end
 end
