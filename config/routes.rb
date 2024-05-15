@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     namespace :v0 do
       resources :markets, only: [:index, :show]
       resources :vendors, only: [:create, :destroy]
-      get '/markets/:id/vendors', to: 'vendors#index'
+      get '/markets/:id/vendors', to: 'market_vendors#index'
     end
   end
 end
