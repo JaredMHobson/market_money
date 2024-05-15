@@ -55,6 +55,31 @@ describe "Vendors API" do
     end
   end
 
+  it "can create a new vendor" do
+    vendor_params = ({
+                    name: 'Cool Vendor Name',
+                    description: 'We sell cool things',
+                    contact_name: 'Coolio',
+                    contact_phone: '(123) 456 7890.',
+                    credit_accepted: false
+                  })
+
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
+
+    expect(response).to have_http_status(201)
+
+    created_vendor = Vendor.last
+
+    expect(response).to be_successful
+    expect(created_vendor.name).to eq(vendor_params[:name])
+    expect(created_vendor.description).to eq(vendor_params[:description])
+    expect(created_vendor.contact_name).to eq(vendor_params[:contact_name])
+    expect(created_vendor.contact_phone).to eq(vendor_params[:contact_phone])
+    expect(created_vendor.credit_accepted).to eq(vendor_params[:credit_accepted])
+  end
+
   describe 'Sad Paths' do
     it 'will send a 404 status and descriptive error message if an invalid market ID is passed' do
       get "/api/v0/markets/1/vendors"
@@ -67,6 +92,26 @@ describe "Vendors API" do
       expect(data[:errors]).to be_a(Array)
       expect(data[:errors].first[:status]).to eq("404")
       expect(data[:errors].first[:title]).to eq("Couldn't find Market with 'id'=1")
+    end
+
+    it 'will send a 400 status and descriptive error message if any attributes are left out when creating a vendor' do
+      vendor_params = ({
+        name: 'Cool Vendor Name',
+        contact_phone: '(123) 456 7890.',
+        credit_accepted: false
+      })
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
+
+      expect(response.status).to eq(400)
+
+      data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(data[:errors]).to be_a(Array)
+      expect(data[:errors].first[:status]).to eq("400")
+      expect(data[:errors].first[:title]).to eq(["Description can't be blank", "Contact name can't be blank"])
     end
   end
 end
