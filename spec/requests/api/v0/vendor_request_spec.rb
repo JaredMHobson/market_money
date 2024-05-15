@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe "Vendors API" do
+  # Create a new Vendor
   it "can create a new vendor" do
     vendor_params = ({
                     name: 'Cool Vendor Name',
@@ -26,6 +27,7 @@ describe "Vendors API" do
     expect(created_vendor.credit_accepted).to eq(vendor_params[:credit_accepted])
   end
 
+  # Delete a Vendor
   it "can destroy a vendor and its MarketVendors" do
     vendor = create(:vendor)
     market_vendor = create(:market_vendor, vendor: vendor)
