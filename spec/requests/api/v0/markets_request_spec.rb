@@ -16,8 +16,14 @@ describe "Markets API" do
     expect(markets.count).to eq(3)
 
     markets.each do |market|
-      expect(market[:attributes]).to have_key(:id)
-      expect(market[:attributes][:id]).to be_a Integer
+      expect(market).to have_key(:id)
+      expect(market[:id]).to be_a String
+
+      expect(market).to have_key(:type)
+      expect(market[:type]).to eq('market')
+
+      expect(market).to have_key(:attributes)
+      expect(market[:attributes]).to be_a Hash
 
       expect(market[:attributes]).to have_key(:name)
       expect(market[:attributes][:name]).to be_a String
@@ -59,36 +65,42 @@ describe "Markets API" do
 
       market = market_data[:data]
 
-        expect(market[:attributes]).to have_key(:id)
-        expect(market[:attributes][:id]).to be_a Integer
+      expect(market).to have_key(:id)
+      expect(market[:id]).to be_a String
 
-        expect(market[:attributes]).to have_key(:name)
-        expect(market[:attributes][:name]).to be_a String
+      expect(market).to have_key(:type)
+      expect(market[:type]).to eq('market')
 
-        expect(market[:attributes]).to have_key(:street)
-        expect(market[:attributes][:street]).to be_a String
+      expect(market).to have_key(:attributes)
+      expect(market[:attributes]).to be_a Hash
 
-        expect(market[:attributes]).to have_key(:city)
-        expect(market[:attributes][:city]).to be_a String
+      expect(market[:attributes]).to have_key(:name)
+      expect(market[:attributes][:name]).to be_a String
 
-        expect(market[:attributes]).to have_key(:county)
-        expect(market[:attributes][:county]).to be_a String
+      expect(market[:attributes]).to have_key(:street)
+      expect(market[:attributes][:street]).to be_a String
 
-        expect(market[:attributes]).to have_key(:state)
-        expect(market[:attributes][:state]).to be_a String
+      expect(market[:attributes]).to have_key(:city)
+      expect(market[:attributes][:city]).to be_a String
 
-        expect(market[:attributes]).to have_key(:zip)
-        expect(market[:attributes][:zip]).to be_a String
+      expect(market[:attributes]).to have_key(:county)
+      expect(market[:attributes][:county]).to be_a String
 
-        expect(market[:attributes]).to have_key(:lat)
-        expect(market[:attributes][:lat]).to be_a String
+      expect(market[:attributes]).to have_key(:state)
+      expect(market[:attributes][:state]).to be_a String
 
-        expect(market[:attributes]).to have_key(:lon)
-        expect(market[:attributes][:lon]).to be_a String
+      expect(market[:attributes]).to have_key(:zip)
+      expect(market[:attributes][:zip]).to be_a String
 
-        expect(market[:attributes]).to have_key(:vendor_count)
-        expect(market[:attributes][:vendor_count]).to be_a Integer
-  end
+      expect(market[:attributes]).to have_key(:lat)
+      expect(market[:attributes][:lat]).to be_a String
+
+      expect(market[:attributes]).to have_key(:lon)
+      expect(market[:attributes][:lon]).to be_a String
+
+      expect(market[:attributes]).to have_key(:vendor_count)
+      expect(market[:attributes][:vendor_count]).to be_a Integer
+    end
 
   describe 'Sad Paths' do
     it 'will send a 404 status and descriptive error message if an invalid market ID is passed' do
