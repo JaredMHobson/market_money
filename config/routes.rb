@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v0 do
       resources :markets, only: [:index, :show]
-      resources :vendors, only: [:create]
+      resources :vendors, only: [:create, :destroy]
       get '/markets/:id/vendors', to: 'vendors#index'
     end
   end

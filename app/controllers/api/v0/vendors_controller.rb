@@ -9,6 +9,11 @@ class Api::V0::VendorsController < ApplicationController
     status: :created
   end
 
+  def destroy
+    render json: Vendor.find(params[:id]).destroy,
+    status: :no_content
+  end
+
   private
 
   def vendor_params
