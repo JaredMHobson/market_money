@@ -16,8 +16,14 @@ describe "Markets API" do
     expect(markets.count).to eq(3)
 
     markets.each do |market|
-      expect(market[:attributes]).to have_key(:id)
-      expect(market[:attributes][:id]).to be_a Integer
+      expect(market).to have_key(:id)
+      expect(market[:id]).to be_a String
+
+      expect(market).to have_key(:type)
+      expect(market[:type]).to eq('market')
+
+      expect(market).to have_key(:attributes)
+      expect(market[:attributes]).to be_a Hash
 
       expect(market[:attributes]).to have_key(:name)
       expect(market[:attributes][:name]).to be_a String
@@ -58,9 +64,14 @@ describe "Markets API" do
       market_data = JSON.parse(response.body, symbolize_names: true)
 
       market = market_data[:data]
+        expect(market).to have_key(:id)
+        expect(market[:id]).to be_a String
 
-        expect(market[:attributes]).to have_key(:id)
-        expect(market[:attributes][:id]).to be_a Integer
+        expect(market).to have_key(:type)
+        expect(market[:type]).to eq('market')
+
+        expect(market).to have_key(:attributes)
+        expect(market[:attributes]).to be_a Hash
 
         expect(market[:attributes]).to have_key(:name)
         expect(market[:attributes][:name]).to be_a String
