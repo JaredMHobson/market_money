@@ -1,4 +1,5 @@
 class Api::V0::VendorsController < ApplicationController
+
   def create
     render json: VendorSerializer.new(Vendor.create!(vendor_params)),
     status: :created
@@ -9,9 +10,14 @@ class Api::V0::VendorsController < ApplicationController
     status: :no_content
   end
 
+  def show
+    render json: VendorSerializer.new(Vendor.find(params[:id]))
+  end
+
   private
 
   def vendor_params
     params.require(:vendor).permit(:name, :description, :contact_name, :contact_phone, :credit_accepted)
   end
 end
+
