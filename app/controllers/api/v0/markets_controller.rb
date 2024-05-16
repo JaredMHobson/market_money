@@ -13,7 +13,7 @@ class Api::V0::MarketsController < ApplicationController
       render json: MarketSerializer.new(Market.search(search_params))
     else
       render json: ErrorSerializer.new(ErrorMessage.new("Invalid set of parameters. Please provide a valid set of parameters to perform a search with this endpoint.", 422))
-        .serialize_json, status: unprocessable_entity
+        .serialize_json, status: :unprocessable_entity
     end
   end
 

@@ -5,7 +5,7 @@ class Api::V0::MarketVendorsController < ApplicationController
   end
 
   def create
-    if params[:market_id].nil? || params[:vendor_id].nil?
+    if params[:market_vendor][:market_id].nil? || params[:market_vendor][:vendor_id].nil?
       render json: { errors: [{status: '400', title:'A market_id and vendor_id are required' }]},
       status: :bad_request
     else
