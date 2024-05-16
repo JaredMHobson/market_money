@@ -16,6 +16,9 @@ class Market < ApplicationRecord
   end
 
   def self.search(search_params)
-    where("name ILIKE ?", "%#{search_params}%")
+    # unless (search_params[:city] && search_params[:name]) || search_params[:name]
+    unless search_params.keys.sort == [:city, :name] || search_params.keys.sort == [:city]
+      where("name ILIKE ? AND city ILIKE ? AND state ILIKE ?", "%#{search_params[:name]}%", "%#{search_params[:city]}%", "%#{search_params[:state]}%")
+    end 
   end
 end
