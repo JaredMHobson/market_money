@@ -79,7 +79,7 @@ describe "Vendors API" do
 
     it "returns a 404 if an invalid id is given" do
       get "/api/v0/vendors/1"
-  
+
       expect(response).to have_http_status(404)
       error_response = JSON.parse(response.body, symbolize_names: true)
 
@@ -90,7 +90,7 @@ describe "Vendors API" do
 
     it "returns a 404 if an invalid id is given" do
       get "/api/v0/vendors/1"
-  
+
       expect(response).to have_http_status(404)
       error_response = JSON.parse(response.body, symbolize_names: true)
 
@@ -172,14 +172,14 @@ describe "Vendors API" do
     old_name = vendor.name
     old_phone = vendor.contact_phone
     headers = {"CONTENT_TYPE" => "application/json"}
-    
+
     updated_attributes = {
                       name: "Blah",
                       contact_phone: "867-5309"
                       }
     # using #update controller action to patch, shorter than URI
     patch "/api/v0/vendors/#{vendor.id}", headers: headers, params: JSON.generate(updated_attributes)
-    
+
     expect(response).to be_successful
 
     data = JSON.parse(response.body, symbolize_names: true)
