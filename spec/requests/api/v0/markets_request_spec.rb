@@ -220,7 +220,7 @@ describe "Markets API" do
       expect(data[:errors].first[:title]).to eq("Couldn't find Market with 'id'=1")
     end
 
-    xit 'does not return results by city' do
+    it 'does not return results by city' do
       get '/api/v0/markets/search?city=Denver', headers: @headers
 
       expect(response).to_not be_successful
@@ -232,8 +232,8 @@ describe "Markets API" do
       expect(markets).to eq nil
     end
 
-    xit 'does not return results by city and name' do
-      get '/api/v0/markets/search?city=Denver', headers: @headers
+    it 'does not return results by city and name' do
+      get '/api/v0/markets/search?city=Denver&name=Blah', headers: @headers
 
       expect(response).to_not be_successful
       expect(response.status).to eq 422
