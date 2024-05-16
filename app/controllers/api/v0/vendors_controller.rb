@@ -14,6 +14,13 @@ class Api::V0::VendorsController < ApplicationController
     render json: VendorSerializer.new(Vendor.find(params[:id]))
   end
 
+  def update
+    vendor = Vendor.find(params[:id])
+    if vendor.update!(vendor_params)
+      render json: VenderSerializer.new(vendor)
+    end
+  end
+
   private
 
   def vendor_params

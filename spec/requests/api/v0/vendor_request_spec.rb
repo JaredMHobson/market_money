@@ -115,4 +115,12 @@ describe "Vendors API" do
       expect(vendor[:attributes]).to have_key(:credit_accepted)
       expect(vendor[:attributes][:credit_accepted]).to be_in([true, false])
   end
+
+  # update vendor
+  it "can update a vendor" do
+    id = create(:vendor).id
+    get "/api/v0/vendors/#{id}"
+
+    
+  end
 end
