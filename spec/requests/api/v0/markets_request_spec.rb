@@ -102,6 +102,79 @@ describe "Markets API" do
     expect(market[:attributes][:vendor_count]).to be_a Integer
   end
 
+  # Search
+  describe 'search functionality' do
+    before :each do
+      @market = Market.create!(state: "Colorado", city: "Denver", name: "Blah", street: "123 Main St", county: "Denver", zip: "80303", lat: "10", lon: "11")
+      @market2 = Market.create!(state: "Colorado", city: "Jamestown", name: "Blah2", street: "222 Street Name", county: "Denver", zip: "80303", lat: "10", lon: "11")
+      @market3 = Market.create!(state: "Nevada", city: "Las Vegas", name: "Blah3", street: "222 Street Name", county: "Denver", zip: "80303", lat: "10", lon: "11")
+      @headers = {"CONTENT_TYPE" => "application/json"}
+    end
+    
+    it 'can return results from state, city, and  name' do
+      # search_params = {
+      #                   state: "Colorado",
+      #                   city: "Denver",
+      #                   name: "Blah"
+      #                 }
+      
+      get '/api/v0/markets/search?city=Denver&name=Blah&state=Colorado', headers: @headers
+
+      expect(response).to be_successful
+  
+      search_data = JSON.parse(response.body, symbolize_names: true)
+  
+      markets = search_data[:data]
+
+      #@market1 expected
+    end
+
+    it 'can return results from state' do
+      get '/api/v0/markets/search?state=Colorado', headers: @headers
+
+      expect(response).to be_successful
+
+      search_data = JSON.parse(response.body, symbolize_names: true)
+  
+      markets = search_data[:data]
+      # markets 1 and 2
+    end
+
+    it 'can return results from state and city' do
+      get '/api/v0/markets/search?city=Denver&name=Blah&state=Colorado', headers: @headers
+
+      expect(response).to be_successful
+  
+      search_data = JSON.parse(response.body, symbolize_names: true)
+  
+      markets = search_data[:data]
+
+      # expect 
+    end
+
+    it 'can return results from state and name' do
+      search_params = {
+                        state: "Colorado",
+                        name: "Blah"
+                      }
+
+    end
+
+    it 'can return results from name' do
+      search_params = {name: "Blah"}
+
+    end
+
+    it 'can search case insensitive and partials' do
+      search_params = {
+                      state: "col",
+                      city: "Denv",
+                      name: "Bl"
+                        }
+
+    end
+  end
+
   describe 'Sad Paths' do
     it 'will send a 404 status and descriptive error message if an invalid market ID is passed' do
       get "/api/v0/markets/1"
@@ -114,6 +187,30 @@ describe "Markets API" do
       expect(data[:errors]).to be_a(Array)
       expect(data[:errors].first[:status]).to eq("404")
       expect(data[:errors].first[:title]).to eq("Couldn't find Market with 'id'=1")
+    end
+
+    xit 'does not return results by city' do
+      get '/api/v0/markets/search?city=Denver', headers: @headers
+
+      expect(response).to_not be_successful
+  
+      search_data = JSON.parse(response.body, symbolize_names: true)
+  
+      markets = search_data[:data]
+      require 'pry'; binding.pry
+      # nil
+    end
+
+    xit 'does not return results by city and name' do
+      get '/api/v0/markets/search?city=Denver', headers: @headers
+
+      expect(response).to_not be_successful
+  
+      search_data = JSON.parse(response.body, symbolize_names: true)
+  
+      markets = search_data[:data]
+
+      # nil
     end
   end
 end

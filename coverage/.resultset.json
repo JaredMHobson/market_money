@@ -245,6 +245,7 @@
           1,
           1,
           1,
+          1,
           null,
           null,
           null
@@ -266,13 +267,13 @@
           1,
           null,
           1,
-          0,
+          1,
           null,
           null,
           1,
           null,
-          8,
-          6,
+          1,
+          1,
           null,
           null,
           null
@@ -285,15 +286,64 @@
           null
         ]
       },
-      "/Users/mel/Turing/3mod/projects/market_money/spec/models/market_vendor_spec.rb": {
+      "/Users/mel/Turing/3mod/projects/market_money/app/controllers/api/v0/markets_controller.rb": {
         "lines": [
           1,
           null,
           1,
-          1,
-          2,
-          2,
+          0,
           null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/mel/Turing/3mod/projects/market_money/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/mel/Turing/3mod/projects/market_money/app/serializers/market_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
           null
         ]
       },
@@ -305,18 +355,6 @@
           null,
           1,
           1,
-          null,
-          null
-        ]
-      },
-      "/Users/mel/Turing/3mod/projects/market_money/spec/models/vendor_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
           null,
           null
         ]
@@ -334,8 +372,18 @@
           1,
           null
         ]
+      },
+      "/Users/mel/Turing/3mod/projects/market_money/app/serializers/vendor_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1715892934
+    "timestamp": 1715895051
   }
 }

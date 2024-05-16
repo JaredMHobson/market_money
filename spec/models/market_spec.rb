@@ -73,7 +73,7 @@ RSpec.describe Market, type: :model do
                       name: "Blah"
                       }
 
-      expect(Market.search(search_params)).to eq nil     
+      expect(Market.search(search_params)).to eq nil 
     end
   end
 end
