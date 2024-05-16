@@ -86,6 +86,31 @@ describe "Market Vendors API" do
       expect(vendors).to be_empty
     end
 
+  # Create a new MarketVendor
+  it "can create a new MarketVendor" do
+    market = create(:market)
+    vendor = create(:vendor)
+
+    mv_params = ({
+                    market_id: market.id,
+                    vendor_id: vendor.id
+                  })
+
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    post "/api/v0/market_vendors", headers: headers, params: JSON.generate(mv_params)
+
+    expect(response.status).to eq(201)
+
+    created_mv = MarketVendor.last
+
+    expect(response).to be_successful
+    expect(created_mv.market_id).to eq(mv_params[:market_id])
+    expect(created_mv.vendor_id).to eq(mv_params[:vendor_id])
+    expect(market.vendors).to include(vendor)
+    expect(vendor.markets).to include(market)
+  end
+
   describe 'Sad Paths' do
     it 'when sending a GET all vendors for a market request, will send a 404 status and descriptive error message if an invalid market ID is passed' do
       get "/api/v0/markets/1/vendors"
@@ -128,6 +153,88 @@ describe "Market Vendors API" do
       expect(data[:errors]).to be_a(Array)
       expect(data[:errors].first[:status]).to eq("404")
       expect(data[:errors].first[:title]).to eq("Couldn't find Vendor with 'id'=1")
+    end
+
+    it 'when sending a POST new MarketVendor for a MarketVendor request, will send a 404 status and descriptive error message if an invalid market or vendor ID is passed' do
+      market = create(:market)
+      vendor = create(:vendor)
+
+      mv_params = ({
+                      market_id: 1,
+                      vendor_id: vendor.id
+                    })
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(mv_params)
+
+      expect(response.status).to eq(404)
+
+      data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(data[:errors]).to be_a(Array)
+      expect(data[:errors].first[:status]).to eq("404")
+      expect(data[:errors].first[:title]).to eq("Couldn't find Market with 'id'=1")
+
+      mv_params = ({
+                      market_id: market.id,
+                      vendor_id: 1
+                    })
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(mv_params)
+
+      expect(response.status).to eq(404)
+
+      data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(data[:errors]).to be_a(Array)
+      expect(data[:errors].first[:status]).to eq("404")
+      expect(data[:errors].first[:title]).to eq("Couldn't find Vendor with 'id'=1")
+    end
+
+    it 'when sending a POST new MarketVendor for a MarketVendor request, will send a 400 status and descriptive error message if a vendor id and/or a market id' do
+      vendor = create(:vendor)
+
+      mv_params = ({
+                      vendor_id: vendor.id
+                    })
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(mv_params)
+
+      expect(response.status).to eq(400)
+
+      data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(data[:errors]).to be_a(Array)
+      expect(data[:errors].first[:status]).to eq("400")
+      expect(data[:errors].first[:title]).to eq("A market_id and vendor_id are required")
+    end
+
+    it 'when sending a POST new MarketVendor for a MarketVendor request, will send a 422 status and descriptive error message if that market/vendor combo already exists' do
+      market = create(:market)
+      vendor = create(:vendor)
+      create(:market_vendor, market: market, vendor: vendor)
+
+      mv_params = ({
+                      market_id: market.id,
+                      vendor_id: vendor.id
+                    })
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(mv_params)
+
+      expect(response.status).to eq(422)
+
+      data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(data[:errors]).to be_a(Array)
+      expect(data[:errors].first[:status]).to eq("422")
+      expect(data[:errors].first[:title]).to eq("Duplicate MarketVendor record")
     end
   end
 end

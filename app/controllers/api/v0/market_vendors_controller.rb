@@ -4,6 +4,19 @@ class Api::V0::MarketVendorsController < ApplicationController
     render json: VendorSerializer.new(vendors)
   end
 
+  def create
+    if params[:market_id].nil? || params[:vendor_id].nil?
+      render json: { errors: [{status: '400', title:'A market_id and vendor_id are required' }]},
+      status: :bad_request
+    else
+      Market.find(market_vendor_params[:market_id])
+      Vendor.find(market_vendor_params[:vendor_id])
+
+      render json: MarketVendorSerializer.new(MarketVendor.create!(market_vendor_params)),
+      status: :created
+    end
+  end
+
   def destroy
     market = Market.find(market_vendor_params[:market_id])
     vendor = Vendor.find(market_vendor_params[:vendor_id])

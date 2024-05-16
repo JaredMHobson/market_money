@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_15_031928) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_16_043329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "market_vendors", force: :cascade do |t|
     t.bigint "market_id"
     t.bigint "vendor_id"
+    t.index ["market_id", "vendor_id"], name: "index_market_vendors_on_market_id_and_vendor_id", unique: true
     t.index ["market_id"], name: "index_market_vendors_on_market_id"
     t.index ["vendor_id"], name: "index_market_vendors_on_vendor_id"
   end
