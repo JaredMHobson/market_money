@@ -1,7 +1,7 @@
 class Api::V0::VendorsController < ApplicationController
   
   def show
-    vendor = render json: VendorSerializer.new(Vendor.find(params[:id]))
+    vendor = Vendor.find_by(id: params[:id])
     if vendor
       render json: VendorSerializer.new(vendor)
     else
