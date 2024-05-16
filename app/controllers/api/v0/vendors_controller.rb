@@ -1,4 +1,5 @@
 class Api::V0::VendorsController < ApplicationController
+
   def create
     render json: VendorSerializer.new(Vendor.create!(vendor_params)),
     status: :created
@@ -10,12 +11,7 @@ class Api::V0::VendorsController < ApplicationController
   end
 
   def show
-    vendor = Vendor.find_by(id: params[:id])
-    if vendor
-      render json: VendorSerializer.new(vendor)
-    else
-      render json: { errors: [{ detail: "Can't find Vendor with 'id'=#{params[:id]}" }] }, status: :not_found
-    end
+    render json: VendorSerializer.new(Vendor.find(params[:id]))
   end
 
   private
@@ -24,3 +20,4 @@ class Api::V0::VendorsController < ApplicationController
     params.require(:vendor).permit(:name, :description, :contact_name, :contact_phone, :credit_accepted)
   end
 end
+

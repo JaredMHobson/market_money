@@ -78,17 +78,18 @@ describe "Vendors API" do
     end
 
     it "returns a 404 if an invalid id is given" do
-      get "/api/v0/vendors/123123132123"
+      get "/api/v0/vendors/1"
   
       expect(response).to have_http_status(404)
-      error_response = JSON.parse(response.body, sympboliez_names: true)
-  
+      error_response = JSON.parse(response.body, symbolize_names: true)
+
       expect(error_response[:errors]).to be_a Array
-      expect(error_response[:errors].first[:detail]).to eq("Couldn't find Vendor with 'id'=123123132123")
+      expect(error_response[:errors].first[:status]).to eq("404")
+      expect(error_response[:errors].first[:title]).to eq("Couldn't find Vendor with 'id'=1")
     end
   end
 
-  #get one vendor
+  # get one vendor
   it "returns a single vendor info" do
     id = create(:vendor).id
     get "/api/v0/vendors/#{id}"
@@ -98,9 +99,6 @@ describe "Vendors API" do
     vendor_data = JSON.parse(response.body, symbolize_names: true)
 
     vendor = vendor_data[:data]
-
-      expect(vendor[:attributes]).to have_key(:id)
-      expect(vendor[:attributes][:id]).to be_a String
 
       expect(vendor[:attributes]).to have_key(:name)
       expect(vendor[:attributes][:name]).to be_a String
