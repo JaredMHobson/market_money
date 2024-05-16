@@ -14,6 +14,13 @@ class Api::V0::VendorsController < ApplicationController
     render json: VendorSerializer.new(Vendor.find(params[:id]))
   end
 
+  def update
+    vendor = Vendor.find(params[:id])
+    # bang is used to raise an exception if the update fails
+    vendor.update!(vendor_params)
+    render json: VendorSerializer.new(vendor)
+  end
+
   private
 
   def vendor_params
