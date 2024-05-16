@@ -87,6 +87,28 @@ describe "Vendors API" do
       expect(error_response[:errors].first[:status]).to eq("404")
       expect(error_response[:errors].first[:title]).to eq("Couldn't find Vendor with 'id'=1")
     end
+
+    it "returns a 404 if an invalid id is given" do
+      get "/api/v0/vendors/1"
+  
+      expect(response).to have_http_status(404)
+      error_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(error_response[:errors]).to be_a Array
+      expect(error_response[:errors].first[:status]).to eq("404")
+      expect(error_response[:errors].first[:title]).to eq("Couldn't find Vendor with 'id'=1")
+    end
+
+    it "returns a 404 if an invalid id is given when doing patch" do
+      get "/api/v0/vendors/1"
+  
+      expect(response).to have_http_status(404)
+      error_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(error_response[:errors]).to be_a Array
+      expect(error_response[:errors].first[:status]).to eq("404")
+      expect(error_response[:errors].first[:title]).to eq("Couldn't find Vendor with 'id'=1")
+    end
   end
 
   # get one vendor
@@ -117,7 +139,7 @@ describe "Vendors API" do
   end
 
   # update vendor
-  it "can update a vendor" do
+  it "can update multiple attributes of a vendor" do
     vendor = create(:vendor)
     old_name = vendor.name
     old_phone = vendor.contact_phone
