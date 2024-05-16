@@ -76,5 +76,117 @@ describe "Vendors API" do
       expect(data[:errors].first[:status]).to eq("400")
       expect(data[:errors].first[:title]).to eq("Validation failed: Description can't be blank, Contact name can't be blank")
     end
+
+    it "returns a 404 if an invalid id is given" do
+      get "/api/v0/vendors/1"
+
+      expect(response).to have_http_status(404)
+      error_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(error_response[:errors]).to be_a Array
+      expect(error_response[:errors].first[:status]).to eq("404")
+      expect(error_response[:errors].first[:title]).to eq("Couldn't find Vendor with 'id'=1")
+    end
+
+    it "returns a 404 if an invalid id is given" do
+      get "/api/v0/vendors/1"
+
+      expect(response).to have_http_status(404)
+      error_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(error_response[:errors]).to be_a Array
+      expect(error_response[:errors].first[:status]).to eq("404")
+      expect(error_response[:errors].first[:title]).to eq("Couldn't find Vendor with 'id'=1")
+    end
+
+    # NOT FINISHED
+    # update vendor
+    it "returns a 400 if required data is missing when doing patch" do
+      vendor = create(:vendor)
+      id = vendor.id
+      blank_name = {
+                    name: "",
+                    contact_phone: ""
+                  }
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      patch "/api/v0/vendors/#{id}", headers: headers, params: JSON.generate(blank_name)
+
+      expect(response).to_not be_successful
+
+      error_response = JSON.parse(response.body, symbolize_names: true)
+        expect(error_response[:errors]).to be_a Array
+        expect(error_response[:errors].first[:status]).to eq("400")
+        expect(error_response[:errors].first[:title]).to eq("Validation failed: Name can't be blank, Contact phone can't be blank")
+    end
+
+    # update vendor
+    it "is a 404 error when updating if vendor id is invalid" do
+      headers = {"CONTENT_TYPE" => "application/json"}
+      attributes = {
+                      name: "Blah",
+                      contact_phone: "867-5309"
+                      }
+
+      patch "/api/v0/vendors/1235325243", headers: headers, params: JSON.generate(attributes)
+
+      expect(response).to_not be_successful
+      error_response = JSON.parse(response.body, symbolize_names: true)
+        expect(error_response[:errors]).to be_a Array
+        expect(error_response[:errors].first[:status]).to eq("404")
+        expect(error_response[:errors].first[:title]).to eq("Couldn't find Vendor with 'id'=1235325243")
+    end
+  end
+
+  # get one vendor
+  it "returns a single vendor info" do
+    id = create(:vendor).id
+    get "/api/v0/vendors/#{id}"
+
+    expect(response).to be_successful
+
+    vendor_data = JSON.parse(response.body, symbolize_names: true)
+
+    vendor = vendor_data[:data]
+
+      expect(vendor[:attributes]).to have_key(:name)
+      expect(vendor[:attributes][:name]).to be_a String
+
+      expect(vendor[:attributes]).to have_key(:description)
+      expect(vendor[:attributes][:description]).to be_a String
+
+      expect(vendor[:attributes]).to have_key(:contact_name)
+      expect(vendor[:attributes][:contact_name]).to be_a String
+
+      expect(vendor[:attributes]).to have_key(:contact_phone)
+      expect(vendor[:attributes][:contact_phone]).to be_a String
+
+      expect(vendor[:attributes]).to have_key(:credit_accepted)
+      expect(vendor[:attributes][:credit_accepted]).to be_in([true, false])
+  end
+
+  # update vendor
+  it "can update multiple attributes of a vendor" do
+    vendor = create(:vendor)
+    old_name = vendor.name
+    old_phone = vendor.contact_phone
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    updated_attributes = {
+                      name: "Blah",
+                      contact_phone: "867-5309"
+                      }
+    # using #update controller action to patch, shorter than URI
+    patch "/api/v0/vendors/#{vendor.id}", headers: headers, params: JSON.generate(updated_attributes)
+
+    expect(response).to be_successful
+
+    data = JSON.parse(response.body, symbolize_names: true)
+    expect(data).to be_a Hash
+    expect(data[:data][:attributes][:name]).to eq("Blah")
+    expect(data[:data][:attributes][:name]).to_not eq(old_name)
+    expect(data[:data][:attributes][:contact_phone]).to eq("867-5309")
+    expect(data[:data][:attributes][:name]).to_not eq(old_phone)
   end
 end

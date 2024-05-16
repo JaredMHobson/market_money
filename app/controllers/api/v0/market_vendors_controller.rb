@@ -27,6 +27,8 @@ class Api::V0::MarketVendorsController < ApplicationController
       )
 
       market_vendor.delete
+
+      render json: '', status: :no_content
   end
 
   private

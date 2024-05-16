@@ -226,7 +226,7 @@ describe "Market Vendors API" do
 
       headers = {"CONTENT_TYPE" => "application/json"}
 
-      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(mv_params)
+      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_vendor: mv_params)
 
       expect(response.status).to eq(422)
 
