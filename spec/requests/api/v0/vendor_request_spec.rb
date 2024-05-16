@@ -118,9 +118,25 @@ describe "Vendors API" do
 
   # update vendor
   it "can update a vendor" do
-    id = create(:vendor).id
-    get "/api/v0/vendors/#{id}"
-
+    vendor = create(:vendor)
+    old_name = vendor.name
+    old_phone = vendor.contact_phone
+    headers = {"CONTENT_TYPE" => "application/json"}
     
+    updated_attributes = {
+                      name: "Blah",
+                      contact_phone: "867-5309"
+                      }
+    # using #update controller action to patch, shorter than URI
+    patch "/api/v0/vendors/#{vendor.id}", headers: headers, params: JSON.generate(updated_attributes)
+    
+    expect(response).to be_successful
+
+    data = JSON.parse(response.body, symbolize_names: true)
+    expect(data).to be_a Hash
+    expect(data[:data][:attributes][:name]).to eq("Blah")
+    expect(data[:data][:attributes][:name]).to_not eq(old_name)
+    expect(data[:data][:attributes][:contact_phone]).to eq("867-5309")
+    expect(data[:data][:attributes][:name]).to_not eq(old_phone)
   end
 end
