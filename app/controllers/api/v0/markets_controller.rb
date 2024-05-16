@@ -9,7 +9,6 @@ class Api::V0::MarketsController < ApplicationController
   end
 
   def search
-    require 'pry'; binding.pry
     if permitted_search_params?  
       render json: MarketSerializer.new(Market.search(search_params))
     else
