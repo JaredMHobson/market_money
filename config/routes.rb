@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :markets, only: [:index, :show]
       resources :vendors, only: [:create, :destroy]
       get '/markets/:id/vendors', to: 'market_vendors#index'
+      delete '/market_vendors', to: 'market_vendors#destroy'
     end
   end
 end
