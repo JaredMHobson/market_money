@@ -25,7 +25,7 @@ class Api::V0::MarketsController < ApplicationController
 
   def permitted_search_params?
     keys = search_params.keys.sort
-    invalid_combo = [[:city], [:city], [:name]]
+    invalid_combo = [[:city], [[:city], [:name]]]
     invalid_combo.exclude?(keys)
   end
 end
