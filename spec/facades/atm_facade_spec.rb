@@ -24,7 +24,7 @@ RSpec.describe "Atm Facade" do
     atms.each do |atm|
       expect(atm[:lon]).to be_a Float
       expect(atm[:lat]).to be_a Float
-      expect(atm[:dist]).to be_a Float
+      expect(atm[:distance]).to be_a Float
       expect(atm[:name]).to be_a String
       expect(atm[:address]).to be_a String
       expect(atm).to be_a Atm

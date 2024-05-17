@@ -104,7 +104,7 @@ describe "Markets API" do
 
   # atms nearby
   describe 'nearby atms' do
-    it 'returns nearby atms with name, addy, dist, lon, and lat', :vcr do
+    it 'returns nearby atms with name, addy, distance, lon, and lat', :vcr do
       headers = {"CONTENT_TYPE" => "application/json"}
       market = Market.create!({ lat: "36.98844",
       lon: "-121.97483", name: "Blah", street: "123 Main St", city: "Denver", county: "Denver", state: "CO", zip: "80303" })
@@ -121,7 +121,7 @@ describe "Markets API" do
         expect(atm[:type]).to eq("atm")
         expect(atm[:attributes][:lat]).to be_a Float
         expect(atm[:attributes][:lon]).to be_a Float
-        expect(atm[:attributes][:dist]).to be_a Float
+        expect(atm[:attributes][:distance]).to be_a Float
         expect(atm[:attributes][:address]).to be_a String
         expect(atm[:attributes][:name]).to be_a String
       end

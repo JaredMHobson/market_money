@@ -1,7 +1,7 @@
 class Atm
   attr_reader :lon,
               :lat,
-              :dist,
+              :distance,
               :name,
               :address,
               :id
@@ -10,7 +10,7 @@ class Atm
     @id = nil
     @lon = attributes[:lon]
     @lat = attributes[:lat]
-    @dist = attributes[:dist]
+    @distance = attributes[:distance]
     @name = attributes[:name]
     @address = attributes[:address]
   end

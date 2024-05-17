@@ -25,7 +25,7 @@ class AtmFacade
     address: data[:address][:freeformAddress],
     lat: data[:position][:lat],
     lon: data[:position][:lon],
-    dist: data[:dist]
+    distance: data[:dist]
     }
   end
 end

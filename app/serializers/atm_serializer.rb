@@ -1,4 +1,4 @@
 class AtmSerializer
   include JSONAPI::Serializer
-  attributes :name, :address, :dist, :lon, :lat
+  attributes :name, :address, :distance, :lon, :lat
 end
