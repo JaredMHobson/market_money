@@ -15,18 +15,19 @@ RSpec.describe "Atm Facade" do
     expect(facade.market).to be_an_instance_of Market
   end
 
-  it "#nearby_atms" do
+  it "#nearby_atms", :vcr do
     market = create(:market)
     facade = AtmFacade.new(market)
     atms = facade.nearby_atms
 
-    expect(atm_locations).to be_a Array
+    expect(atms).to be_a Array
     atms.each do |atm|
       expect(atm[:lon]).to be_a Float
       expect(atm[:lat]).to be_a Float
       expect(atm[:dist]).to be_a Float
       expect(atm[:name]).to be_a String
       expect(atm[:address]).to be_a String
+      expect(atm).to be_a Atm
     end
   end
 end

@@ -3,9 +3,11 @@ class Atm
               :lat,
               :dist,
               :name,
-              :address
+              :address,
+              :id
 
   def initialize(attributes)
+    @id = nil
     @lon = attributes[:lon]
     @lat = attributes[:lat]
     @dist = attributes[:dist]

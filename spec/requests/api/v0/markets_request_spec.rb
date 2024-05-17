@@ -102,6 +102,32 @@ describe "Markets API" do
     expect(market[:attributes][:vendor_count]).to be_a Integer
   end
 
+  # atms nearby
+  describe 'nearby atms' do
+    it 'returns nearby atms with name, addy, dist, lon, and lat', :vcr do
+      headers = {"CONTENT_TYPE" => "application/json"}
+      market = Market.create!({ lat: "36.98844",
+      lon: "-121.97483", name: "Blah", street: "123 Main St", city: "Denver", county: "Denver", state: "CO", zip: "80303" })
+      
+      get "/api/v0/markets/#{market.id}/nearest_atms", headers: headers
+
+      expect(response).to be_successful
+      parsed_json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_json[:data]).to be_a Array
+      parsed_json[:data].each do |atm|
+
+        expect(atm[:id]).to be nil
+        expect(atm[:type]).to eq("atm")
+        expect(atm[:attributes][:lat]).to be_a Float
+        expect(atm[:attributes][:lon]).to be_a Float
+        expect(atm[:attributes][:dist]).to be_a Float
+        expect(atm[:attributes][:address]).to be_a String
+        expect(atm[:attributes][:name]).to be_a String
+      end
+    end
+  end
+
   # Search
   describe 'search functionality' do
     before :each do
@@ -242,6 +268,19 @@ describe "Markets API" do
   
       markets = search_data[:data]
       expect(markets).to eq nil
+    end
+
+    it 'returns a 404 when given an invalid Market id when searching for nearby atms' do
+      get "/api/v0/markets/123123123/nearest_atms"
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+
+      data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(data[:errors]).to be_a(Array)
+      expect(data[:errors].first[:status]).to eq("404")
+      expect(data[:errors].first[:title]).to eq("Couldn't find Market with 'id'=123123123")
     end
   end
 end

@@ -1,6 +1,6 @@
 class AtmService
   def get_nearest_atms(location)
-    get_url("nearbySearch/.json?lat=#{location[:lat]}&lon=#{location[:lon]}categorySet=7397")[:results]
+    get_url("nearbySearch/.json?lat=#{location[:lat]}&lon=#{location[:lon]}&categorySet=7397")[:results]
   end
 
   def get_url(url)

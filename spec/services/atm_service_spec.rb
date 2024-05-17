@@ -18,4 +18,11 @@ RSpec.describe "Atm Service" do
     expect(parsed_json).to be_a Hash
     expect(parsed_json[:results]).to be_a Array
   end
+
+  it "#get_nearest_atms", :vcr do
+    location = { lon: -121.97483, lat: 36.98844 }
+    service = AtmService.new
+
+    expect(service.get_nearest_atms(location)).to be_a Array
+  end
 end
