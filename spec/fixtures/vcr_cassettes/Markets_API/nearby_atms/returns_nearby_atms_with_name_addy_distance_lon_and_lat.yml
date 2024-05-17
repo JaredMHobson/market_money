@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 17 May 2024 01:18:39 GMT
+      - Fri, 17 May 2024 01:44:54 GMT
       Content-Type:
       - application/json; charset=utf-8
       Vary:
@@ -27,7 +27,7 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Tracking-Id:
-      - b474ad07-10ed-4d27-9caf-5502bef9dae9
+      - 48afb073-9cee-4685-9d06-903e6e4127dc
       Access-Control-Expose-Headers:
       - Tracking-ID
       Server:
@@ -35,16 +35,16 @@ http_interactions:
       X-Tomtom-Processed-By:
       - westus2
       X-Tomtom-Message-Id:
-      - ad3baa9a-a21b-477b-9fe6-96a15e83eb4e
+      - f946aba6-1c54-451d-93a1-960b48a06d2c
       X-Tomtom-Upstream-Service-Time:
-      - '26'
+      - '29'
       X-Tomtom-Attempt-Count:
       - '1'
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"summary":{"queryType":"NEARBY","queryTime":12,"numResults":10,"offset":0,"totalResults":100,"fuzzyLevel":1,"geoBias":{"lat":36.98844,"lon":-121.97483}},"results":[{"type":"POI","id":"Ahr1KpCA4aHwm7pd14WaBQ","score":99.9650650024,"dist":34.93292,"info":"search:ta:840069009475383-US","poi":{"name":"ATM
+      string: '{"summary":{"queryType":"NEARBY","queryTime":13,"numResults":10,"offset":0,"totalResults":100,"fuzzyLevel":1,"geoBias":{"lat":36.98844,"lon":-121.97483}},"results":[{"type":"POI","id":"Ahr1KpCA4aHwm7pd14WaBQ","score":99.9650650024,"dist":34.93292,"info":"search:ta:840069009475383-US","poi":{"name":"ATM
         at Atm Concepts","categorySet":[{"id":7397}],"categories":["cash dispenser"],"classifications":[{"code":"CASH_DISPENSER","names":[{"nameLocale":"en-US","name":"cash
         dispenser"}]}]},"address":{"streetNumber":"2525","streetName":"Soquel Drive","municipality":"Santa
         Cruz","countrySecondarySubdivision":"Santa Cruz","countrySubdivision":"CA","countrySubdivisionName":"California","countrySubdivisionCode":"CA","postalCode":"95065","extendedPostalCode":"95065-1950","countryCode":"US","country":"United
@@ -96,5 +96,5 @@ http_interactions:
         Cruz","countrySubdivision":"CA","countrySubdivisionName":"California","countrySubdivisionCode":"CA","postalCode":"95073","extendedPostalCode":"95073-2034","countryCode":"US","country":"United
         States","countryCodeISO3":"USA","freeformAddress":"3711 Soquel Drive, Soquel,
         CA 95073","localName":"Soquel"},"position":{"lat":36.987649,"lon":-121.967438},"viewport":{"topLeftPoint":{"lat":36.98855,"lon":-121.96856},"btmRightPoint":{"lat":36.98675,"lon":-121.96631}},"entryPoints":[{"type":"main","position":{"lat":36.98718,"lon":-121.96755}}]}]}'
-  recorded_at: Fri, 17 May 2024 01:18:39 GMT
+  recorded_at: Fri, 17 May 2024 01:44:54 GMT
 recorded_with: VCR 6.2.0

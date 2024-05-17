@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 17 May 2024 01:18:39 GMT
+      - Fri, 17 May 2024 01:44:54 GMT
       Content-Type:
       - application/json; charset=utf-8
       Vary:
@@ -27,7 +27,7 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Tracking-Id:
-      - d560cfad-96e6-441a-8b02-db6147063c3c
+      - e74f61eb-ae90-49ee-8cff-96cd62bf07de
       Access-Control-Expose-Headers:
       - Tracking-ID
       Server:
@@ -35,16 +35,16 @@ http_interactions:
       X-Tomtom-Processed-By:
       - westus2
       X-Tomtom-Message-Id:
-      - e1d2a28c-ad15-4542-81bf-820face50e3d
+      - 723aeb03-0003-4fba-8f0d-c23553b67400
       X-Tomtom-Upstream-Service-Time:
-      - '29'
+      - '63'
       X-Tomtom-Attempt-Count:
       - '1'
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"summary":{"queryType":"NEARBY","queryTime":13,"numResults":10,"offset":0,"totalResults":100,"fuzzyLevel":1,"geoBias":{"lat":35.07904,"lon":-106.60068}},"results":[{"type":"POI","id":"zCkCLyNT3JUF8Kf5TsnodA","score":99.9995574951,"dist":0.445287,"info":"search:ta:840359000810929-US","poi":{"name":"ATM","categorySet":[{"id":7397}],"categories":["cash
+      string: '{"summary":{"queryType":"NEARBY","queryTime":46,"numResults":10,"offset":0,"totalResults":100,"fuzzyLevel":1,"geoBias":{"lat":35.07904,"lon":-106.60068}},"results":[{"type":"POI","id":"zCkCLyNT3JUF8Kf5TsnodA","score":99.9995574951,"dist":0.445287,"info":"search:ta:840359000810929-US","poi":{"name":"ATM","categorySet":[{"id":7397}],"categories":["cash
         dispenser"],"classifications":[{"code":"CASH_DISPENSER","names":[{"nameLocale":"en-US","name":"cash
         dispenser"}]}]},"address":{"streetNumber":"3902","streetName":"Central Avenue
         Southeast","municipality":"Albuquerque","neighbourhood":"Nob Hill","countrySecondarySubdivision":"Bernalillo","countrySubdivision":"NM","countrySubdivisionName":"New
@@ -106,5 +106,5 @@ http_interactions:
         Mexico","countrySubdivisionCode":"NM","postalCode":"87108","extendedPostalCode":"87108-1225","countryCode":"US","country":"United
         States","countryCodeISO3":"USA","freeformAddress":"4720 Central Avenue Southeast,
         Albuquerque, NM 87108","localName":"Albuquerque"},"position":{"lat":35.078207,"lon":-106.591563},"viewport":{"topLeftPoint":{"lat":35.07911,"lon":-106.59266},"btmRightPoint":{"lat":35.07731,"lon":-106.59046}},"entryPoints":[{"type":"main","position":{"lat":35.07829,"lon":-106.59153}}]}]}'
-  recorded_at: Fri, 17 May 2024 01:18:39 GMT
+  recorded_at: Fri, 17 May 2024 01:44:54 GMT
 recorded_with: VCR 6.2.0
