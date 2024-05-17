@@ -30,18 +30,26 @@ tomtom:
 # Endpoints
 ## Get All Markets
 Gets a list of all markets and their attributes along with the IDs of all of their vendors. 
+</br>
+
 `GET http://localhost:3000/api/v0/markets`
 
 ## Get Market by ID
 Gets a single market's information by using their ID.
+</br>
+
 `GET http://localhost:3000/api/v0/markets/{{market_id}}`
 
 ## Get All Vendors for a Market
 Gets a list of all vendors and their attributes that belong to the market whose ID you pass.
+</br>
+
 `GET http://localhost:3000/api/v0/markets/{{market_id}}/vendors`
 
 ## Get Vendor by ID
 Gets a single vendor's information by using their ID. 
+</br>
+
 `GET http://localhost:3000/api/v0/vendors/{{vendor_id}}`
 
 ## Create a Vendor
@@ -60,14 +68,20 @@ Creates a new vendor record when passing all attributes for a vendor through `pa
     }
   }
 ```
+</br>
+
 `POST http://localhost:3000/api/v0/vendors`
 
 ## Delete a Vendor
 Deletes a vendor when passing a valid vendor ID
+</br>
+
 `DELETE http://localhost:3000/api/v0/vendors/{{vendor_id}}`
 
 ## Update a Vendor
 Updates a vendor's information when passing any vendor attribute through params along with a valid vendor ID.
+</br>
+
 `PATCH http://localhost:3000/api/v0/vendors/{{vendor_id}}`
 
 ## Create a MarketVendor
@@ -80,10 +94,14 @@ Creates a market vendor pair, linking a market with a vendor. Duplicate entries 
     "vendor_id": 22114
   }
 ```
+</br>
+
 `CREATE http://localhost:3000/api/v0/market_vendors`
 
 ## Delete a MarketVendor
 Deletes a market vendor pair. A valid market ID AND vendor ID must be passed through `params[:market_id]` and `params[:vendor_id]` respectively.
+</br>
+
 `DELETE http://localhost:3000/api/v0/market_vendors`
 
 ## Search Markets by state, city, and/or name
@@ -93,13 +111,18 @@ The following combination of parameters can be sent in at any time:
 - state, city
 - state, city, name
 - state, name
-- name</br>
+- name
+</br>
 
 The following combination of parameters can NOT be sent in at any time:
 - city
 - city, name
+</br>
+
 `GET /api/v0/markets/search?city=albuquerque&state=new Mexico&name=Nob hill`
 
 ## Get ATMs Near a Market
 Finds all nearby ATMs, and their attributes, to a market's location using its latitude and longitude by passing a valid market ID.
+</br>
+
 `GET http://localhost:3000/api/v0/markets/{{market_id}}/nearest_atms`
