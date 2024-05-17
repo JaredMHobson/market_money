@@ -55,36 +55,36 @@ describe "Market Vendors API" do
     end
   end
 
-    # Delete a MarketVendor
-    it "can destroy a MarketVendor" do
-      market1 = create(:market)
-      market2 = create(:market)
-      vendor1 = create(:vendor)
-      vendor2 = create(:vendor)
-      market_vendor1 = create(:market_vendor, market: market1, vendor: vendor2)
-      market_vendor2 = create(:market_vendor, market: market2, vendor: vendor1)
+  # Delete a MarketVendor
+  it "can destroy a MarketVendor" do
+    market1 = create(:market)
+    market2 = create(:market)
+    vendor1 = create(:vendor)
+    vendor2 = create(:vendor)
+    market_vendor1 = create(:market_vendor, market: market1, vendor: vendor2)
+    market_vendor2 = create(:market_vendor, market: market2, vendor: vendor1)
 
-      expect(MarketVendor.count).to eq(2)
+    expect(MarketVendor.count).to eq(2)
 
-      headers = {"CONTENT_TYPE" => "application/json"}
+    headers = {"CONTENT_TYPE" => "application/json"}
 
-      delete "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_id: market1.id, vendor_id: vendor2.id)
+    delete "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_id: market1.id, vendor_id: vendor2.id)
 
-      expect(response).to be_successful
-      expect(response.status).to eq(204)
-      expect(response.body).to be_empty
-      expect(MarketVendor.count).to eq(1)
-      expect{MarketVendor.find(market_vendor1.id)}.to raise_error(ActiveRecord::RecordNotFound)
-      expect(MarketVendor.find(market_vendor2.id)).to eq(market_vendor2)
+    expect(response).to be_successful
+    expect(response.status).to eq(204)
+    expect(response.body).to be_empty
+    expect(MarketVendor.count).to eq(1)
+    expect{MarketVendor.find(market_vendor1.id)}.to raise_error(ActiveRecord::RecordNotFound)
+    expect(MarketVendor.find(market_vendor2.id)).to eq(market_vendor2)
 
-      get "/api/v0/markets/#{market1.id}/vendors"
+    get "/api/v0/markets/#{market1.id}/vendors"
 
-      vendors_data = JSON.parse(response.body, symbolize_names: true)
+    vendors_data = JSON.parse(response.body, symbolize_names: true)
 
-      vendors = vendors_data[:data]
+    vendors = vendors_data[:data]
 
-      expect(vendors).to be_empty
-    end
+    expect(vendors).to be_empty
+  end
 
   # Create a new MarketVendor
   it "can create a new MarketVendor" do
@@ -234,7 +234,7 @@ describe "Market Vendors API" do
 
       expect(data[:errors]).to be_a(Array)
       expect(data[:errors].first[:status]).to eq("422")
-      expect(data[:errors].first[:title]).to eq("Duplicate MarketVendor record")
+      expect(data[:errors].first[:title]).to eq("Duplicate record")
     end
   end
 end

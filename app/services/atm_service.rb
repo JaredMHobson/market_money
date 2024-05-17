@@ -14,4 +14,3 @@ class AtmService
     end
   end
 end
-

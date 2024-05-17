@@ -108,7 +108,7 @@ describe "Markets API" do
       headers = {"CONTENT_TYPE" => "application/json"}
       market = Market.create!({ lat: "36.98844",
       lon: "-121.97483", name: "Blah", street: "123 Main St", city: "Denver", county: "Denver", state: "CO", zip: "80303" })
-      
+
       get "/api/v0/markets/#{market.id}/nearest_atms", headers: headers
 
       expect(response).to be_successful
@@ -136,7 +136,7 @@ describe "Markets API" do
       @market3 = Market.create!(state: "Nevada", city: "Las Vegas", name: "Blah3", street: "222 Street Name", county: "Denver", zip: "80303", lat: "10", lon: "11")
       @headers = {"CONTENT_TYPE" => "application/json"}
     end
-    
+
     it 'can return results from state, city, and  name' do
       get '/api/v0/markets/search?city=Denver&name=Blah&state=Colorado', headers: @headers
 
@@ -144,9 +144,9 @@ describe "Markets API" do
       expect(response.status).to eq(200)
 
       search_data = JSON.parse(response.body, symbolize_names: true)
-  
+
       markets = search_data[:data]
-        # only @market1 expected
+
         expect(markets.first[:attributes][:name]).to eq(@market1.name)
         expect(markets.first[:attributes][:city]).to eq(@market1.city)
         expect(markets.first[:attributes][:state]).to eq(@market1.state)
@@ -159,76 +159,76 @@ describe "Markets API" do
       expect(response.status).to eq(200)
 
       search_data = JSON.parse(response.body, symbolize_names: true)
-  
+
       markets = search_data[:data]
-        # markets 1 and 2
-        expect(markets).to_not include(@market3)
-        expect(markets.first[:attributes][:name]).to eq(@market1.name)
-        expect(markets.first[:attributes][:city]).to eq(@market1.city)
-        expect(markets.first[:attributes][:state]).to eq(@market1.state)
-        expect(markets.second[:attributes][:name]).to eq(@market2.name)
-        expect(markets.second[:attributes][:city]).to eq(@market2.city)
-        expect(markets.second[:attributes][:state]).to eq(@market2.state)
+
+      expect(markets).to_not include(@market3)
+      expect(markets.first[:attributes][:name]).to eq(@market1.name)
+      expect(markets.first[:attributes][:city]).to eq(@market1.city)
+      expect(markets.first[:attributes][:state]).to eq(@market1.state)
+      expect(markets.second[:attributes][:name]).to eq(@market2.name)
+      expect(markets.second[:attributes][:city]).to eq(@market2.city)
+      expect(markets.second[:attributes][:state]).to eq(@market2.state)
     end
 
     it 'can return results from state and city' do
       get '/api/v0/markets/search?city=Denver&state=Colorado', headers: @headers
 
       expect(response).to be_successful
-  
+
       search_data = JSON.parse(response.body, symbolize_names: true)
-  
+
       markets = search_data[:data]
-      # markets 1
-        expect(markets).to_not include(@market3)
-        expect(markets.first[:attributes][:name]).to eq(@market1.name)
-        expect(markets.first[:attributes][:city]).to eq(@market1.city)
-        expect(markets.first[:attributes][:state]).to eq(@market1.state)
+
+      expect(markets).to_not include(@market3)
+      expect(markets.first[:attributes][:name]).to eq(@market1.name)
+      expect(markets.first[:attributes][:city]).to eq(@market1.city)
+      expect(markets.first[:attributes][:state]).to eq(@market1.state)
     end
 
     it 'can return results from state and name' do
       get '/api/v0/markets/search?state=Colorado&name=Blah', headers: @headers
 
       expect(response).to be_successful
-  
+
       search_data = JSON.parse(response.body, symbolize_names: true)
-  
+
       markets = search_data[:data]
-      # market 1
-        expect(markets).to_not include(@market3, @market2)
-        expect(markets.first[:attributes][:name]).to eq(@market1.name)
-        expect(markets.first[:attributes][:city]).to eq(@market1.city)
-        expect(markets.first[:attributes][:state]).to eq(@market1.state)
+
+      expect(markets).to_not include(@market3, @market2)
+      expect(markets.first[:attributes][:name]).to eq(@market1.name)
+      expect(markets.first[:attributes][:city]).to eq(@market1.city)
+      expect(markets.first[:attributes][:state]).to eq(@market1.state)
     end
 
     it 'can return results from name' do
       get '/api/v0/markets/search?state=Colorado&name=Blah', headers: @headers
 
       expect(response).to be_successful
-  
+
       search_data = JSON.parse(response.body, symbolize_names: true)
-  
+
       markets = search_data[:data]
-      # market 1
-        expect(markets).to_not include(@market3, @market2)
-        expect(markets.first[:attributes][:name]).to eq(@market1.name)
-        expect(markets.first[:attributes][:city]).to eq(@market1.city)
-        expect(markets.first[:attributes][:state]).to eq(@market1.state)
+
+      expect(markets).to_not include(@market3, @market2)
+      expect(markets.first[:attributes][:name]).to eq(@market1.name)
+      expect(markets.first[:attributes][:city]).to eq(@market1.city)
+      expect(markets.first[:attributes][:state]).to eq(@market1.state)
     end
 
     it 'can search case insensitive and partials' do
       get '/api/v0/markets/search?state=Col&name=ah2&city=Jame', headers: @headers
 
       expect(response).to be_successful
-  
+
       search_data = JSON.parse(response.body, symbolize_names: true)
-  
+
       markets = search_data[:data]
-      # market 2
-        expect(markets).to_not include(@market3, @market1)
-        expect(markets.first[:attributes][:name]).to eq(@market2.name)
-        expect(markets.first[:attributes][:city]).to eq(@market2.city)
-        expect(markets.first[:attributes][:state]).to eq(@market2.state)
+
+      expect(markets).to_not include(@market3, @market1)
+      expect(markets.first[:attributes][:name]).to eq(@market2.name)
+      expect(markets.first[:attributes][:city]).to eq(@market2.city)
+      expect(markets.first[:attributes][:state]).to eq(@market2.state)
     end
   end
 
@@ -251,9 +251,9 @@ describe "Markets API" do
 
       expect(response).to_not be_successful
       expect(response.status).to eq 422
-  
+
       search_data = JSON.parse(response.body, symbolize_names: true)
-  
+
       markets = search_data[:data]
       expect(markets).to eq nil
     end
@@ -263,9 +263,9 @@ describe "Markets API" do
 
       expect(response).to_not be_successful
       expect(response.status).to eq 422
-  
+
       search_data = JSON.parse(response.body, symbolize_names: true)
-  
+
       markets = search_data[:data]
       expect(markets).to eq nil
     end

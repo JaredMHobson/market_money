@@ -16,7 +16,8 @@ class ApplicationController < ActionController::API
   end
 
   def record_not_unique_response(exception)
-    render json: ErrorSerializer.new(ErrorMessage.new('Duplicate MarketVendor record', 422))
+    render json: ErrorSerializer.new(
+      ErrorMessage.new('Duplicate record', 422))
       .serialize_json, status: :unprocessable_entity
   end
 end

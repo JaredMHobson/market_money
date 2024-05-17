@@ -14,5 +14,4 @@ class Atm
     @name = attributes[:name]
     @address = attributes[:address]
   end
-
 end

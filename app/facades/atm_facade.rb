@@ -21,7 +21,7 @@ class AtmFacade
   end
 
   def format_atm_data(data)
-    { name: data[:poi][:name], 
+    { name: data[:poi][:name],
     address: data[:address][:freeformAddress],
     lat: data[:position][:lat],
     lon: data[:position][:lon],
