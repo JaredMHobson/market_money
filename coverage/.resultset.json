@@ -251,28 +251,27 @@
           null
         ]
       },
-      "/Users/mel/Turing/3mod/projects/market_money/app/services/atm_service.rb": {
+      "/Users/mel/Turing/3mod/projects/market_money/app/poros/atm.rb": {
         "lines": [
           1,
           1,
-          0,
           null,
           null,
-          1,
-          1,
-          1,
+          null,
           null,
           null,
           1,
           2,
           2,
-          null,
+          2,
+          2,
+          2,
           null,
           null,
           null
         ]
       }
     },
-    "timestamp": 1715903284
+    "timestamp": 1715905628
   }
 }
