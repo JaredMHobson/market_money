@@ -27,4 +27,3 @@ class Api::V0::VendorsController < ApplicationController
     params.require(:vendor).permit(:name, :description, :contact_name, :contact_phone, :credit_accepted)
   end
 end
-
